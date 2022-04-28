@@ -1,0 +1,13 @@
+<?php
+$f=preg_replace('/\/$/','',__DIR__."/example/{$_SERVER['REQUEST_URI']}");
+if(is_dir($f)){
+    $abf=preg_replace('/\/$/','',$_SERVER['REQUEST_URI']);
+    $fs=glob("$f/*");
+    foreach($fs as $one){
+        $one=str_replace($f.'/','',$one);
+        echo "<a href='$abf$one'>$one</a><br/>";
+    }
+    return true;
+}else{
+    return false;
+}
