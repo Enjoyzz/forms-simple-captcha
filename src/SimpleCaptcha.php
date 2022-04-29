@@ -5,27 +5,47 @@ declare(strict_types=1);
 namespace Enjoys\Forms\Captcha\SimpleCaptcha;
 
 use Enjoys\Forms\AttributeFactory;
-use Enjoys\Forms\Captcha\CaptchaBase;
-use Enjoys\Forms\Captcha\CaptchaInterface;
 use Enjoys\Forms\Element;
+use Enjoys\Forms\Interfaces\CaptchaInterface;
 use Enjoys\Forms\Interfaces\Ruleable;
+use Enjoys\Forms\Traits\Request;
 use Enjoys\Session\Session as Session;
+use Enjoys\Traits\Options;
 use Webmozart\Assert\Assert;
 
-class SimpleCaptcha extends CaptchaBase implements CaptchaInterface
+class SimpleCaptcha implements CaptchaInterface
 {
+    use Options;
+    use Request;
+
     private string $code = '';
     private Session $session;
+    private string $name = 'captcha_defaults';
+    private ?string $ruleMessage = null;
 
     public function __construct(?string $message = null)
     {
         $this->session = new Session();
 
-        $this->setName('captcha_defaults');
         if (is_null($message)) {
             $message = 'Не верно введен код';
         }
         $this->setRuleMessage($message);
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getRuleMessage(): ?string
+    {
+        return $this->ruleMessage;
+    }
+
+    public function setRuleMessage(?string $message = null): void
+    {
+        $this->ruleMessage = $message;
     }
 
     /**
