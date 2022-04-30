@@ -4,7 +4,7 @@
     "license": "MIT",
     "require": {
         "php": ">= 8.0",
-        "enjoys/forms": "^5.2.5",
+        "enjoys/forms": ">5.2 <5.3",
         "ext-gd": "*"
     },
     "require-dev": {
