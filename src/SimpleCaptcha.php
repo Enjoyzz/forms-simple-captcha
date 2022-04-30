@@ -73,7 +73,7 @@ class SimpleCaptcha implements CaptchaInterface
 
     public function renderHtml(Element $element): string
     {
-        $element->setAttrs(
+        $element->setAttributes(
             AttributeFactory::createFromArray([
                 'type' => 'text',
                 'autocomplete' => 'off'
