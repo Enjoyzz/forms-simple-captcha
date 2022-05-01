@@ -23,8 +23,12 @@ class SimpleCaptcha implements CaptchaInterface
     private string $name = 'captcha_defaults';
     private ?string $ruleMessage = null;
 
-    public function __construct(?string $message = null)
+    public function __construct(?string $message = null, array $options = [])
     {
+
+        $this->setOptions($options);
+        putenv('GDFONTPATH=' . realpath($this->getOption('gd_FontPath', __DIR__.'/fonts')));
+
         $this->session = new Session();
 
         if (is_null($message)) {
@@ -169,20 +173,42 @@ class SimpleCaptcha implements CaptchaInterface
                 $x = (int)($x + ($width * 0.8) / \count($letters) + \rand(0, (int)($width * 0.01)));
             }
 
-            if ($h == rand(1, 2)) {
-                $y = (int)((($height * 1) / 4) + \rand(0, (int)($height * 0.1)));
-            } else {
-                $y = (int)((($height * 1) / 4) - \rand(0, (int)($height * 0.1)));
-            }
+//            if (rand(0, 1)) {
+//                $y = (int)((($height * 1) / 2) + \rand(0, (int)($height * 0.1)));
+//            } else {
+//                $y = (int)((($height * 1) / 2) - \rand(0, (int)($height * 0.1)));
+//            }
+
+                $y = (int)($height / 1.5);
 
 
             // Изменяем регистр символа
             if (rand(0, 1)) {
                 $letter = \strtoupper($letter);
             }
+
             // Выводим символ на изображение
-            \imagestring($img, 4, $x, $y, $letter, $color);
+            \imagefttext(
+                $img,
+                rand(30, 40),
+                rand(-50, 50),
+                $x,
+                $y,
+                $color,
+                $this->getOption('font', 'OhioKraft.otf'),
+                $letter,
+                [
+                    'linespacing' => 2.5
+                ]
+            );
             $x++;
+        }
+
+
+        $linenum = rand(5, 7);
+        for ($i = 0; $i < $linenum; $i++) {
+            $color = imagecolorallocate($img, rand(0, 255), rand(0, 200), rand(0, 255));
+            imageline($img, rand(0, 20), rand(1, 50), rand(150, 180), rand(1, 50), $color);
         }
 
         return $img;
