@@ -2,7 +2,6 @@
 
 namespace Tests\Enjoys\Forms\Captcha\SimpleCaptcha;
 
-use Enjoys\Forms\Captcha\Defaults\Defaults;
 use Enjoys\Forms\Captcha\SimpleCaptcha\SimpleCaptcha;
 use Enjoys\Forms\Elements\Captcha;
 use Enjoys\Forms\Exception\ExceptionRule;
@@ -44,14 +43,14 @@ class DefaultsTest extends _TestCase
         );
 
         $captcha_element = new Captcha($captcha);
-        $captcha_element->renderHtml();
+        $captcha_element->baseHtml();
 
 
         $this->assertArrayHasKey('foo', $captcha->getOptions());
         $this->assertArrayHasKey('bar', $captcha->getOptions());
         $this->assertEquals('v_baz', $captcha->getOption('baz'));
-        $this->assertEquals('text', $captcha_element->getAttr('type')->getValueString());
-        $this->assertEquals('off', $captcha_element->getAttr('autocomplete')->getValueString());
+        $this->assertEquals('text', $captcha_element->getAttribute('type')->getValueString());
+        $this->assertEquals('off', $captcha_element->getAttribute('autocomplete')->getValueString());
     }
 
 
@@ -160,7 +159,7 @@ class DefaultsTest extends _TestCase
         ]);
         $element = new Captcha($captcha);
         $element->prepare();
-        $element->renderHtml();
+        $element->baseHtml();
     }
 
     public function testRenderWithInvalidParametersHeight()
@@ -172,7 +171,7 @@ class DefaultsTest extends _TestCase
         ]);
         $element = new Captcha($captcha);
         $element->prepare();
-        $element->renderHtml();
+        $element->baseHtml();
     }
 
     public function testRenderWithDefaultsParametersHeightAndWidth()
@@ -182,7 +181,7 @@ class DefaultsTest extends _TestCase
 
         $element->prepare();
 
-        $resultRenderer = $element->renderHtml();
+        $resultRenderer = $element->baseHtml();
         $this->assertStringContainsString(
             '<img alt="captcha image" src="data:image/jpeg;base64,',
             $resultRenderer
@@ -216,7 +215,7 @@ class DefaultsTest extends _TestCase
 
         $element->validate();
 
-        $html = $element->renderHtml();
+        $html = $element->baseHtml();
         $this->assertEquals(6, \strlen($captcha->getCode()));
         $this->assertStringContainsString('img alt="captcha image" src="data:image/jpeg;base64,', $html);
         $this->assertStringContainsString(
