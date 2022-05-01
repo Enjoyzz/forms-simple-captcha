@@ -25,9 +25,8 @@ class SimpleCaptcha implements CaptchaInterface
 
     public function __construct(?string $message = null, array $options = [])
     {
-
         $this->setOptions($options);
-        putenv('GDFONTPATH=' . realpath($this->getOption('gd_FontPath', __DIR__.'/fonts')));
+        putenv('GDFONTPATH=' . realpath($this->getOption('gd_FontPath', __DIR__ . '/fonts')));
 
         $this->session = new Session();
 
@@ -179,7 +178,7 @@ class SimpleCaptcha implements CaptchaInterface
 //                $y = (int)((($height * 1) / 2) - \rand(0, (int)($height * 0.1)));
 //            }
 
-                $y = (int)($height - ($height / 4));
+            $y = (int)($height - ($height / 4));
 
 
             // Изменяем регистр символа
@@ -190,7 +189,7 @@ class SimpleCaptcha implements CaptchaInterface
             // Выводим символ на изображение
             \imagefttext(
                 $img,
-                rand(30, 40),
+                rand((int)($height / 2), (int)($height / 1.5)),
                 rand(-30, 30),
                 $x,
                 $y,
@@ -205,10 +204,10 @@ class SimpleCaptcha implements CaptchaInterface
         }
 
 
-        $linenum = rand(5, 7);
+        $linenum = rand((int)($height / 5), (int)($height / 4));
         for ($i = 0; $i < $linenum; $i++) {
             $color = imagecolorallocate($img, rand(0, 255), rand(0, 200), rand(0, 255));
-            imageline($img, rand(0, 20), rand(1, 50), rand(150, 180), rand(1, 50), $color);
+            imageline($img, 0, rand(0, $height), $width, rand(0, $height), $color);
         }
 
         return $img;

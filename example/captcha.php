@@ -10,10 +10,14 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $session = new \Enjoys\Session\Session();
 $form = new Form();
-$captcha = new SimpleCaptcha(options: [
-//    'font' => 'Leto_Text_Sans_Defect.otf'
-]);
+$captcha = new SimpleCaptcha();
+$captcha->setOptions(
+    [
+//        'width' => 500,
+//        'height' => 300
+    ]
 
+);
 $form->captcha($captcha);
 $renderer = new HtmlRenderer($form);
 echo include __DIR__ . '/.assets.php';
