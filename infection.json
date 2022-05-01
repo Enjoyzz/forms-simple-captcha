@@ -9,8 +9,9 @@
         "text": "logs/infection/infection.log",
         "html": "logs/infection/infection.html",
         "summary": "logs/infection/summary.log",
-        "json": "logs/infection/infection-log.json",
-        "perMutator": "logs/infection/per-mutator.md"
+        "stryker": {
+            "badge":  "master"
+        }
     },
     "tmpDir": ".tmp",
     "mutators": {
