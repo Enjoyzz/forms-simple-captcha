@@ -179,7 +179,7 @@ class SimpleCaptcha implements CaptchaInterface
 //                $y = (int)((($height * 1) / 2) - \rand(0, (int)($height * 0.1)));
 //            }
 
-                $y = (int)($height / 1.5);
+                $y = (int)($height - ($height / 4));
 
 
             // Изменяем регистр символа
@@ -191,7 +191,7 @@ class SimpleCaptcha implements CaptchaInterface
             \imagefttext(
                 $img,
                 rand(30, 40),
-                rand(-50, 50),
+                rand(-30, 30),
                 $x,
                 $y,
                 $color,

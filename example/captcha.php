@@ -11,7 +11,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $session = new \Enjoys\Session\Session();
 $form = new Form();
 $captcha = new SimpleCaptcha(options: [
-    'font' => 'OhioKraft.otf'
+//    'font' => 'Leto_Text_Sans_Defect.otf'
 ]);
 
 $form->captcha($captcha);
