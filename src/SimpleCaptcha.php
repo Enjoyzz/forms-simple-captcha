@@ -86,10 +86,10 @@ class SimpleCaptcha implements CaptchaInterface
         $this->generateCode($element);
 
         $w = $this->getOption('width', 150);
-        Assert::integer($w, 'Width parameter must be integer');
+        Assert::integer($w, 'The `width` parameter must be `integer`');
 
         $h = $this->getOption('height', 50);
-        Assert::integer($h, 'Height parameter must be integer');
+        Assert::integer($h, 'The `height` parameter parameter must be `integer`');
 
         $img = $this->createImage($this->getCode(), $w, $h);
 
@@ -111,8 +111,8 @@ class SimpleCaptcha implements CaptchaInterface
     {
         $max = $this->getOption('size', 6);
 
-        Assert::notEq(0, $max);
-        Assert::integer($max);
+        Assert::notEq(0, $max, 'The `size` parameter must not be `0`');
+        Assert::integer($max, sprintf('The `size` parameter should be `int`, but he `%s`', get_debug_type($max)));
 
         $chars = $this->getOption('chars', 'qwertyuiopasdfghjklzxcvbnm1234567890');
         $size = strlen($chars) - 1;
