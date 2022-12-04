@@ -202,11 +202,9 @@ class DefaultsTest extends _TestCase
      */
     public function testRenderHtml()
     {
-        $request = new ServerRequestWrapper(
-            new ServerRequest(parsedBody: [
-                'captcha_defaults' => 'testcode_fail'
-            ], method: 'post')
-        );
+        $request = new ServerRequest(parsedBody: [
+            'captcha_defaults' => 'testcode_fail'
+        ], method: 'post');
 
         $captcha = new SimpleCaptcha('code invalid');
 
@@ -228,11 +226,9 @@ class DefaultsTest extends _TestCase
 
     public function test_validate()
     {
-        $request = new ServerRequestWrapper(
-            new ServerRequest(queryParams: [
+        $request = new ServerRequest(queryParams: [
                 'captcha_defaults' => 'testcode'
-            ], method: 'gEt')
-        );
+            ], method: 'gEt');
         $captcha = new SimpleCaptcha();
 
         $element = new Captcha($captcha);
@@ -240,11 +236,9 @@ class DefaultsTest extends _TestCase
         $this->assertSame('captcha_defaults', $captcha->getName());
         $this->assertTrue($element->validate());
 
-        $request = new ServerRequestWrapper(
-            new ServerRequest(queryParams: [
+        $request = new ServerRequest(queryParams: [
                 'captcha_defaults' => 'testcode_fail'
-            ], method: 'get')
-        );
+            ], method: 'get');
 
         $captcha->setRequest($request);
         $this->assertFalse($element->validate());
