@@ -5,7 +5,6 @@ namespace Tests\Enjoys\Forms\Captcha\SimpleCaptcha;
 use Enjoys\Forms\Captcha\SimpleCaptcha\SimpleCaptcha;
 use Enjoys\Forms\Elements\Captcha;
 use Enjoys\Forms\Exception\ExceptionRule;
-use Enjoys\ServerRequestWrapper;
 use Enjoys\Traits\Reflection;
 use HttpSoft\Message\ServerRequest;
 use Webmozart\Assert\InvalidArgumentException;
